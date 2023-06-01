@@ -24,10 +24,14 @@ groups <- obesityGroups
 
 plotSeries = data.frame(year=character(), mean=numeric(), groups=character())
 years <- names(hrtDisease)[4:17]
+yearsNormal <- as.character((2006:2019))
+countYear <- 1
 for(x in 1:length(groups)){
+  countYear <- 1
   for(year in years){
     mean <- mean(filter(hrtDisease, cnty_fips %in% groups[[x]]$cnty_fips)[[year]])[1]
-    plotSeries <- rbind(plotSeries, data.frame(year=year, mean=mean, group=names(groups)[[x]]))
+    plotSeries <- rbind(plotSeries, data.frame(year=yearsNormal[countYear], mean=mean, group=names(groups)[[x]]))
+    countYear <- countYear + 1
   }
 }
 
