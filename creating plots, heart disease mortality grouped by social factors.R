@@ -5,20 +5,32 @@ library(ggplot2)
 hrtDisease <- read_csv("./formattedData/formattedAtlasDatawStateSorted.csv")
 percentInsured <- read_csv("./formattedData/percentInsured.csv")
 obesity <- read_csv("./socialFactorData/obesity % 2019.csv")
+internet <- read_csv("./socialFactorData/% without broadband internet, 2016-2020 5year.csv")
+diploma <- read_csv("./socialFactorData/% without high school diploma 2016-2020 5year.csv")
+diabetes <- read_csv("./socialFactorData/diagnosed diabetes % 2019.csv")
+cholesterol <- read_csv("./socialFactorData/high cholesterol % 2019.csv")
+incinequality <- read_csv("./socialFactorData/income inequality (gini index), 2016-2020 5year.csv")
+income <- read_csv("./socialFactorData/median household income (grouped) 2020.csv")
+inactivity <- read_csv("./socialFactorData/physical inactivity % 2019.csv")
+poverty <- read_csv("./socialFactorData/poverty % 2020.csv")
+smoker <- read_csv("./socialFactorData/smoker status % 2019.csv")
+urbanrural <- read_csv("./socialFactorData/urban-rural status 2013.csv")
+
+factorName <- "% No HS Diploma 2016-2020"
+socialFactor <- diploma
 
 #remove missing values
-obesity <- obesity %>% filter(Value>0)
+socialFactor <- socialFactor %>% filter(Value>0)
 
 #remove stuff that they don't both have (mostly counties that stopped existing or US territories, etc)
-obesity <- filter(obesity, cnty_fips %in% hrtDisease$cnty_fips)
-hrtDisease <- filter(hrtDisease, cnty_fips %in% obesity$cnty_fips)
+socialFactor <- filter(socialFactor, cnty_fips %in% hrtDisease$cnty_fips)
+hrtDisease <- filter(hrtDisease, cnty_fips %in% socialFactor$cnty_fips)
 
 #create histogram of social factor to aid in grouping them
-ggplot(obTibble, aes(x = Value)) + geom_histogram(data=obesity)
+ggplot(socialFactor, aes(x = Value)) + geom_histogram(data=socialFactor)
 
-obesityGroups <- split(obesity, cut(obesity$Value, 4))
-
-groups <- obesityGroups
+groups <- split(socialFactor, cut(dig.lab = 10, socialFactor$Value, 4))
+# special for urban-rural -> groups <- split(socialFactor, as.factor(socialFactor$Value))
 
 #from the groups, create a series that contains the year, the mean value of heart disease in each group, and the group that the data comes from
 
@@ -41,6 +53,6 @@ ggplot(plotSeries, aes(x = year, y = mean, group = group, color = group)) + geom
   pch = 21, # Type of point that allows us to have both color (border) and fill.
   colour = "#FFFFFF", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = "Average HDM of County-Cohort Groups Based on Obesity in 2019, 2006-2018", 
+) + labs(title = paste(sep="", "Average HDM of County-Cohort Groups Based on ", factorName, ", 2006-2018"), 
          x = "Year", 
-         y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=10))
+         y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9))
