@@ -16,10 +16,10 @@ poverty <- read_csv("./socialFactorData/poverty % 2020.csv")
 smoker <- read_csv("./socialFactorData/smoker status % 2019.csv")
 urbanrural <- read_csv("./socialFactorData/urban-rural status 2013.csv")
 
-factorName <- "% No HS Diploma 2016-2020"
-socialFactor <- diploma
+factorName <- "% Obesity 2019"
+socialFactor <- obesity
 
-#remove missing values
+#remove missing values (-1)
 socialFactor <- socialFactor %>% filter(Value>0)
 
 #remove stuff that they don't both have (mostly counties that stopped existing or US territories, etc)
@@ -29,7 +29,8 @@ hrtDisease <- filter(hrtDisease, cnty_fips %in% socialFactor$cnty_fips)
 #create histogram of social factor to aid in grouping them
 ggplot(socialFactor, aes(x = Value)) + geom_histogram(data=socialFactor)
 
-groups <- split(socialFactor, cut(dig.lab = 10, socialFactor$Value, 4))
+# groups <- split(socialFactor, cut(dig.lab = 10, socialFactor$Value, 4))
+groups <- split(socialFactor, Hmisc::cut2(socialFactor$Value, g=4)) #even sized groups
 # special for urban-rural -> groups <- split(socialFactor, as.factor(socialFactor$Value))
 
 #from the groups, create a series that contains the year, the mean value of heart disease in each group, and the group that the data comes from
