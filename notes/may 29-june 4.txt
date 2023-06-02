@@ -1,0 +1,39 @@
+may 31st meeting notes:
+separate study possible on effect of covid (in future years)
+look at other factors in the county-cohort groups, look at obesity, socioeconomic status, other stuff
+create a map of what counties are in the cohorts
+are there other factors that might contribute to an increase in mortality?
+look at other factors, other things in the cardiac area?
+	maybe whole cardiac cohorts
+	# of diagnosis
+what is avaliable for these counties?
+don't focus on the DIDs right now
+
+the ultimate goal of the project is to expand my skills in data science, find an interesting result
+
+sessions:
+5/31
+1 (10 pm): organize and prioritize for the next few days from the meeting, organize honr 497 assignments (don't mention that), created timesheet for hours
+2: emailed dr. palanki about looking at using other factors for the county-cohort groups, downloaded 11 different factors
+
+why does heart disease mortality go up after 2014 in the low and medium county-cohorts?
+	what are contributing factors to that increase? Dr. Palanki will ask a cardiologist
+		We can get the same data from CDC wonder and the Atlas by following the definition of preventable/avoidable death that the CDC Morbidity and Mortality Weekly Report used in their paper: “In this report, avoidable deaths include all deaths among persons aged <75 years with an underlying cause of ischemic heart disease (International Classification of Diseases, 10th Revision [ICD-10] codes I20–I25), cerebrovascular disease (stroke) (I60–I69), hypertensive disease (I10–I15), or chronic rheumatic heart disease (I05–I09) (2).”
+		
+6/1
+goals:
+	-create graphs based on groupings of the social factors downloaded yesterday
+	-find yearly county data on obesity rates and graph it with heart disease -> should be correlated
+1: finish up mentor-mentee agreement, updated RStudio, fixed old project that didn't make a snapshot in renv
+2: start working on the groupings, the split() and cut() functions make this a way simpler process
+3: created script to split obesity into 4 groups, create a plot series with the heartdisease data, then plot it. should be relatively easy to abstract and reuse for more plots
+4: abstracted it and now i can make plots for all of them, saved all the .pdf files, wrote email to Dr. Palanki
+5: find county-level obesity data over time
+6: try find the lead, where is this data?? found it!
+7-ish: cleaning obesity data, removing rows with missing data
+
+we have groups of fips
+for each group:
+	for each year:
+		average the heart disease rate of all of the fips in the group
+		add a row with the year, the average, and the group to the series
