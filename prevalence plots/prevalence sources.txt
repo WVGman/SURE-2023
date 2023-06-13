@@ -1,0 +1,10 @@
+prevalence:
+hypertension: https://www.cdc.gov/nchs/products/databriefs/db364.htm
+obesity: https://www.cdc.gov/nchs/products/databriefs/db360.htm
+diabetes: https://www.cdc.gov/diabetes/statistics/slides/long_term_trends.pdf
+heart disease: https://www.cdc.gov/nchs/hus/topics/heart-disease-prevalence.htm
+cancer: https://gis.cdc.gov/Cancer/USCS/#/Trends/
+chronic lung disease (COPD): https://www.cdc.gov/copd/data-and-statistics/national-trends.html
+stroke: hard to find
+alzheimer's: hard to find
+chronic kidney disease: https://nccd.cdc.gov/CKD/detail.aspx?Qnum=Q372#refreshPosition

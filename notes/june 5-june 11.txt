@@ -1,0 +1,84 @@
+6/5
+
+1: i've decided that the data is fine, i think the atlas just removed some of the outliers before they did averages, maybe i should do that
+2: working on figuring out triple regression, can't figure out how to add covariates, attempting to follow https://arxiv.org/pdf/2109.05913.pdf in hopes it'll fix it. the staggered rollout really make this tougher than it needed to be
+3: i kinda got it working but i cannot figure out how to add covariates like a population or employment control. kinda miffed about it
+4: a lot more reading and then figuring out that i forgot to account for years over 2019 in the medicaid expansion. fixed it! however, I still can't figure out covariates-- i emailed Dr. Palanki to ask him if he knows anyone who knows how to do this in R, i just can't figure out how to do both the stagger AND the triple regression WITH covariates AND the compensation for share eligibility. ugh.
+
+6/6
+
+Dr. Palanki will ask the data science chair to find help for me. right now he wants graphs for every chronic disease over time, which I can pretty easily do with CDC WONDER, i'm just wondering (hehe) if I should use the underlying cause of death or the multiple causes of death to calculate it
+sessions:
+finding chronic disease prevalence data which took forever, read some lab girl, kind of a shit day
+
+6/7
+1: reading Garthwaite again to write questions for the data science contact
+2: still reading & writing 
+finished writing it, i modified the didregression.R in the RAP folder to actually show both of my regressions using the table. i made a branch in the RAP repo for modifying the RAP stuff, eventually i'll move the files over but for now it's not working so i don't want to move it
+3: 
+
+on 6/7 i found Miller through Garthwaite, and found Khatana through Miller, and proceeded to freak out because Khatana was pretty much identical to our paper, and Miller seemed much better. i just stopped working then
+on 6/8 i attended the terrible R workshop, and also wrote an email to Dr. Palanki about the matter. also wrote an email to Dr. Rito about the R workshop and my willingness to help out
+on 6/9 i met with Dr. Palanki, and there are still a few thingsmissing in Khatana that we could possibly improve on. also met with Dr. Rita and i was suprisingly okay at talking despite the fact that i talked to palanki for an hour and then colin for like 3 1/2 hours straight and i actively felt fatigued
+
+6/10
+khatana limititions- data only goes to 2016, no compensation for ACA subsidized marketplaces, only uses one year of data from the BRFSS, suffers from worse data censoring by not doing 3-year groups (missing over 1000 counties i think)
+why would they do analysis specifically on 45-64 year olds?
+i liked the idea of having multiple "sensitivity analyses", which just do the same analysis but using different kinds of groups, like using different age groups, excluding the staggered states, looking at a subset of diseases, etc.
+i think I should make a chart of how the different ICD chapters in preventable heart disease are changing
+
+miller notes:
+"the reliability of self-reported health measures for U.S. adults and their association with objective health measures are documented to be worse among lower socioeconomic status groups (Dowd and Zajacova, 2007, 2010; Zajacova and Dowd, 2011)."
+that's important to note for the BRFSS data
+
+"Without data that links information on individual Medicaid eligibility to mortality, researchers must rely on differences in exposure over larger population groups – for example, residents of certain states or counties – which contain many individuals who are not directly affected by Medicaid policy."
+
+"DE, MA, NY, and VT all expanded coverage to individuals with incomes reaching the poverty line or greater prior to the ACA; DC received approval to implement its ACA Medicaid expansion early with enrollment starting in 2011."
+IMPORTANT, NEED TO COMPENSATE FOR THIS
+
+the reason Miller wasn't able to use the CDC Mortality Multiple Causes Files is because it does not contain personally identifying information (even the restricted datasets I think), so there's no way to use the PVS system to match the datasets
+
+"By not requiring an individual to first enroll in Medicaid prior to receiving Medicaid-funded care, these policies reinforce the notion that all eligible individuals are effectively covered by the program even if not actually enrolled."
+just kinda neat
+
+"In related work, Goodman-Bacon (2019) demonstrates that staggered treatment timing combined with the presence of time-varying treatment effects can lead to biased DD estimates."
+i need to read Goodman-Bacon
+
+goals:
+read more Miller references if any of them also seem similar, as well as looking at papers that have referenced Miller
+also read Garthwaite for why they excluded a lot of the states
+
+sessions:
+1: rereading Khatana, taking the notes above ^^^, ended up reading some of the grammar of graphics (the book that ggplot is based off of)
+2: read Khatana for like 5 mins extra, rereading Miller
+3: reading miller still because im tired
+
+6/11
+looking at all papers that cited Miller, there are a few interesting ones
+
+Black 2019
+"We use a simulation-based power analysis, in which we impose treatment effects of varying sizes on actual data during the pre-treatment period, and assess whether ACA expansion effects on mortality of plausible size can be detected with our data"
+actually so smart, i'll HAVE to do this if I'm ok with publishing anything
+
+"We conclude that even the nationwide natural experiment provided by the ACA is severely underpowered to detect effects on mortality of plausible size in county-level death certificate data."
+:(
+
+i need to figure out to make a 95% confidence interval
+
+"Large effects are also unlikely
+because prior research finds that the uninsured already consume substantial healthcare -- about 80% as much as the insured"
+yucky
+
+"Second, studying mortality with ACA-induced variation in health insurance is marginal in three senses: (i) those previously uninsured (implying average lower demand for health insurance; see Kowalski’s (2018) evidence on better health among new enrollees in Massachusetts reform than existing enrollees) may experience lower marginal gains from insurance than the already insured; (ii) prior policy interventions already provide emergency care and some healthcare access for vulnerable populations; and (iii) access to health insurance does not equate to access to healthcare, as even the uninsured consume substantial healthcare, so that some insurance-induced healthcare could be at the “flat” (or even the downslope) of the marginal benefit curve."
+yep
+
+"For example, the ACA changes eligibility but does not directly provide insurance. As in any “intentto-treat” (encouragement) experimental design, we can estimate a treatment effect only for the “compliers” with the encouragement. Multiple selection effects are possible, including that those who sign up: (i) may be more health-conscious in other ways; (ii) may have greater healthcare needs (e.g., Kenney et al., 2012); (iii) may be more likely to use additional healthcare once insured; and (iv) may be more compliant with medical advice than the “never-takers” who do not sign up. Thus, estimates for compliers may differ from those for never takers or always takers (the already
+insured)."
+
+"As Table 1 shows, the population-weighted drop in uninsurance rates from 2013 to 2015 for the 50-64 age group averaged 7.1% in Full-Expansion States versus 5.4% in Non-Expansion States; the difference between the two groups is 1.7%.
+This small difference in secular uninsurance declines between treatment and control groups poses a major challenge to any effort to use Medicaid expansion to estimate the effect of health insurance on mortality."
+
+"We find evidence that states have differing mortality trends during the pre-treatment period, which casts doubt on the parallel trends assumption required for valid DD analysis. To address these sources of differing trends, we use a further source of within-state variation:
+mortality trends among those who are 65 or older (and thus always insured) can potentially control
+for the otherwise unobserved state-specific factors that generate non-parallel trends. We thus also use a triple-difference/age-discontinuity specification (similar to Finkelstein and McKnight, 2008), where the third difference is mortality among persons between the ages of 65 and 74, who are eligible for Medicare and should not be affected by Medicaid expansion..."
+an interesting idea!
