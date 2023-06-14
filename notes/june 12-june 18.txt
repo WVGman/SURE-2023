@@ -1,0 +1,48 @@
+6/12
+starting to look more at power analysis, just conceptually
+
+sessions:
+1 & 2: just looking at power analysis
+3: looking at NHANES again, there's a lot of data, including prevalence data and health insurance data, but the geocodes are limited access which kinda sucks. also, the number of respondents is too small
+4 also^
+5: i don't know what to dooooooooo, actually i'm looking for an updated table of what Black 2019 has on page 61
+6: looking at garthwaite again to see wtf shareelegible is, and if i can do another DiD regression with it, because then I can just combine them together and I don't have to worry about a thing (maybe, probably not, but maybe!). oh shit ShareEligible is not what I thought it was, it involves a lot more than just division!
+
+notes:
+
+garthwaite 2019:
+"This measure was generated using a combination of data from the Brookings Institution on zip code income, the Current Population Survey, and Kaiser Family Foundation income limits for eligibility. The measure is intended to calculate the share of a zip code that would have been made newly eligible for Medicaid as a result of the ACA expansion based on income and the state’s preexisting income limits and the distribution of income in the zip code."
+
+in dranove 2016: 
+they calculated the share of nonelderly childless adults that should have been affected by the Mediciad expansions, which can be used as a measure of the strength of the medicaid expansion
+"We focused on this group because they are the predominant group gaining access to coverage under the ACA"
+"over four in five of these uninsured
+are adults who are not living with dependent children" (footnote 15)
+
+6/13
+ugh i'm starting out pretty tired, shoulda brought some tea, OR i should've slept longer
+
+1: fuggedaboutit
+2: trying to find all the information that 
+
+calculating the share of the county that was newly eligible in the year that the expansion happened (2014)
+#1 this is only done for counties that expanded in 2014, otherwise it wouldn't work. might have to substitute data from other years to do that
+
+first, find the number of households that are within the jump in expansion
+	i.e. if monongalia county jumped from 35% of the FPL to 135% of the FPL, then find the number of households that were between those margins.
+	this will require the table from the KFF to find how big the jump is
+	since the income brackets are kinda large (like $10K large), i'll probably have to interpret some of the results, maybe based on a normal curve, or maybe just using a multiplicative fix, idk
+
+then, adjust for the sizes of households in that county
+	if there are a bunch of 8 people households in a county, then a higher income average will still have a lower FPL on average
+	not entirely sure how to do this? 
+	dravone said they "transformed the data on income per household so that they matched the household income distribution relative to the poverty level", but what does that even mean?
+	so, the size of each household dictates the FPL, you can calculate the FPL for any size household.
+	if you have a sample of 4 4-person households and 14 8-person households, then 
+	
+NEVERMIND hold on
+
+ShareEligible, ShareEligibility calculation:
+i think what you do is find the average size of a household in a county, then calculate a "FPL" for the average size of the houses, then convert the FPL percentages to actual dollar values, then you find how many houses are in that size of a bracket by interpolating the income brackets, and then divide that by the total number of houses. i think that works.
+
+anyways i don't think that's the main priority right now

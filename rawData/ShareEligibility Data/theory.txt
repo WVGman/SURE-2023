@@ -1,0 +1,4 @@
+(taken from june 12-june 18)
+i think what you do is find the average size of a household in a county, then calculate a "FPL" for the average size of the houses, then convert the FPL percentages to actual dollar values, then you find how many houses are in that size of a bracket by interpolating the income brackets, and then divide that by the total number of houses. i think that works.
+
+you need to get how much the FPL eligibility changed here: https://web.archive.org/web/20150317055712/http://kff.org:80/medicaid/fact-sheet/medicaid-eligibility-for-adults-as-of-january-1-2014

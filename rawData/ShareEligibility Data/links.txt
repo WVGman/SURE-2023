@@ -1,0 +1,2 @@
+https://data.census.gov/table?q=income&g=010XX00US$0500000&y=2014&tid=ACSST1Y2014.S1901
+https://data.census.gov/table?q=household+size&g=010XX00US$0500000&y=2014&tid=ACSST1Y2014.S1101
