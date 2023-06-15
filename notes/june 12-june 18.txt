@@ -46,3 +46,9 @@ ShareEligible, ShareEligibility calculation:
 i think what you do is find the average size of a household in a county, then calculate a "FPL" for the average size of the houses, then convert the FPL percentages to actual dollar values, then you find how many houses are in that size of a bracket by interpolating the income brackets, and then divide that by the total number of houses. i think that works.
 
 anyways i don't think that's the main priority right now
+
+6/14
+*note to self: you should still go to the library on Wednesdays, it isn't easy to focus at home*
+
+6/15
+redoing the regression to include obesity as a covariate

@@ -5,13 +5,14 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-hrtDisease <- read_csv("C:/Users/Owner/My Drive/RAP/formattedAtlasDatawStateSorted.csv")
-logarithmEmployment <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\formattedLogEmployment.csv)")
-logarithmPopulation <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\formattedLogPopulation.csv)")
-percentNewlyEligible <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\formattedPercentNewlyEligible.csv)")
-medicaidYearOfExpansion <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\medicaidAllYearsOfExpansion.csv)")
-statesFips <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\statesAndFIPS.csv)")
-percentInsured <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\percentInsured.csv)")
+hrtDisease <- read_csv("./formattedData/formattedAtlasDatawStateSorted.csv")
+logarithmEmployment <- read_csv("./formattedData/formattedLogEmployment.csv")
+logarithmPopulation <- read_csv("./formattedData/formattedLogPopulation.csv")
+obesity <- read_csv("./formattedData/nationwideObesityByYear1999-2018.csv")
+percentNewlyEligible <- read_csv("./formattedData/formattedPercentNewlyEligible.csv")
+medicaidYearOfExpansion <- read_csv("./formattedData/medicaidAllYearsOfExpansion.csv")
+statesFips <- read_csv("./formattedData/statesAndFIPS.csv")
+percentInsured <- read_csv("./formattedData/percentInsured.csv")
 #hrtDisease 2006-2019, logEmploy & logPop 2010-2021, percentNewlyEligible 2008-2020
 #ideally i could easily get data for employment and population for before 2010, but apparently not
 years <- 2010:2019 #for comparison in treated
@@ -52,11 +53,14 @@ insurIndex <- 1
 popIndex <- 1
 employIndex <- 1
 eligIndex <- 1
-didTable <- data.frame(GEO_ID = integer(), YEAR = integer(), TREATED=logical(), REL_YEAR=integer(), HRTDISEASE = numeric(), INSURANCERATE = numeric(), LOGPOP = numeric(), LOGEMPLOY = numeric(), PERCELIGIBLE = numeric())
+didTable <- data.frame(GEO_ID = integer(), YEAR = integer(), TREATED=logical(), YEAR_TREATED = integer(), REL_YEAR=integer(), HRTDISEASE = numeric(), INSURANCERATE = numeric(), LOGPOP = numeric(), LOGEMPLOY = numeric(), OBESITY = numeric(), PERCELIGIBLE = numeric())
 for(geo in GEO_IDs){
   for(yearIndex in 1:length(years)){
+    
     #gets year treated
-    # treated <- medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)]
+    year_treated <- medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)]
+    
+    #creates a 0 or 1 in treated if the county has been treated in that year, creates rel_year which finds the difference between the current year and the treated year
     if(medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)] != 999999 & medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)] < 2020){
       rel_year <- years[yearIndex] - medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)]
       treated <- rel_year >= 0
@@ -64,7 +68,6 @@ for(geo in GEO_IDs){
       rel_year <- Inf
       treated <- FALSE
     }
-    # treated <- medicaidYearOfExpansion$year
     heartValue <- numeric();
     while(hrtDisease$GEO_ID[hrtIndex] != geo & hrtIndex < 4000){
       hrtIndex <- hrtIndex + 1
@@ -89,15 +92,18 @@ for(geo in GEO_IDs){
     }
     employValue <- logarithmEmployment[[yearsFormatted[yearIndex]]][employIndex]
     
+    obesityValue <- obesity[[as.character(years[yearIndex])]][1]
+    
     eligValue <- numeric();
     while(percentNewlyEligible$GEO_ID[eligIndex] != geo & eligIndex < 4000){
       eligIndex <- eligIndex + 1
     }
     eligValue <- percentNewlyEligible[[yearsFormatted[yearIndex]]][eligIndex]
     
-    didTable <- didTable %>% add_row(GEO_ID = geo, YEAR = years[yearIndex], TREATED = treated, REL_YEAR = rel_year, HRTDISEASE = heartValue, INSURANCERATE = insurValue, LOGPOP = popValue, LOGEMPLOY = employValue, PERCELIGIBLE = eligValue)
+    didTable <- didTable %>% add_row(GEO_ID = geo, YEAR = years[yearIndex], TREATED = treated, YEAR_TREATED = year_treated, REL_YEAR = rel_year, HRTDISEASE = heartValue, INSURANCERATE = insurValue, LOGPOP = popValue, LOGEMPLOY = employValue, OBESITY = obesityValue, PERCELIGIBLE = eligValue)
   }
   print(geo)
 }
 
-write_csv(didTable, r"(./test/testnewDidTable.csv)")
+write_csv(didTable, r"(./formattedData/DidTable.csv)")
+
