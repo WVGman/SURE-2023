@@ -59,6 +59,9 @@ for(geo in GEO_IDs){
     
     #gets year treated
     year_treated <- medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)]
+    if(year_treated == 999999){
+      year_treated <- 0 #requirement of the att_gt function
+    }
     
     #creates a 0 or 1 in treated if the county has been treated in that year, creates rel_year which finds the difference between the current year and the treated year
     if(medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)] != 999999 & medicaidYearOfExpansion$year[medicaidYearOfExpansion$fip==(geo %/% 1000)] < 2020){
@@ -92,7 +95,8 @@ for(geo in GEO_IDs){
     }
     employValue <- logarithmEmployment[[yearsFormatted[yearIndex]]][employIndex]
     
-    obesityValue <- obesity[[as.character(years[yearIndex])]][1]
+    #combine population with obesity, convert obesity from percent to a number, multiply by the population, then log it
+    obesityValue <- obesity[[as.character(years[yearIndex])]][1]/100
     
     eligValue <- numeric();
     while(percentNewlyEligible$GEO_ID[eligIndex] != geo & eligIndex < 4000){

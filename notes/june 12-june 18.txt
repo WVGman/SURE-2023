@@ -52,3 +52,7 @@ anyways i don't think that's the main priority right now
 
 6/15
 redoing the regression to include obesity as a covariate
+yippee i'm shocked it actually works
+brain mush tho
+
+6/16
