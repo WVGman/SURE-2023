@@ -2,3 +2,28 @@
 i think what you do is find the average size of a household in a county, then calculate a "FPL" for the average size of the houses, then convert the FPL percentages to actual dollar values, then you find how many houses are in that size of a bracket by interpolating the income brackets, and then divide that by the total number of houses. i think that works.
 
 you need to get how much the FPL eligibility changed here: https://web.archive.org/web/20150317055712/http://kff.org:80/medicaid/fact-sheet/medicaid-eligibility-for-adults-as-of-january-1-2014
+
+
+notes from Jun 17:
+average size of a household in a county of those who are affected by medicaid expansion
+calculate the federal poverty line by interpolating the 2014 poverty line
+convert the percentage to an actual dollar value
+how many houses are in that size of a bracket by 
+# interpolating the income brackets, and then divide that by the total number of houses
+
+average size of a household -> lets just use the total for now
+adjusting it by parental status would be:
+avgSizeParents = weightedAvg(averageHouseholdSize[c02,c03,c04], totalHouseholds[c02,c03,c04])
+average size = weightedAvg(c(average size of a parent household, average size of non-parent household), c(number of adults that are parents that are newly eligible for ACA, number of adults that are not parents that are newly eligible for ACA)
+
+these split by married-couple, male householder, female householder, and non-family
+you have the number of households with children
+number of total households
+the average size of a household
+total - numWithChildren = numWithoutChildren
+avreaeg family size
+size of household - family size = non-family household members
+
+the problem is that we have the average size of married-couple, male householder, female householder, and non-family members, but we need to find the average size of a parent household and the size of a non-parent household
+
+SKIP FOR NOW, will do later
