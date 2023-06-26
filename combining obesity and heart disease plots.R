@@ -60,7 +60,7 @@ ggplot(plotSeries, aes(x = year, y = mean, group = group, color = group)) + geom
 ) + labs(title = paste(sep="", "Average Heart Disease Mortality of County-Cohort Groups, 2006-2018"), 
          x = "Year", 
          y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9)
-) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
+) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette) + coord_cartesian(ylim = c(0,85))
 
 
 plotSeries = data.frame(year=character(), mean=numeric(), groups=character())
@@ -89,4 +89,30 @@ ggplot(plotSeries, aes(x = year, y = mean, group = group, color = group)) + geom
          y = "% People Who Are Obese") + theme(plot.title = element_text(size=9)
 ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
 
+#creating plots for the average HDM rate
 
+avgAll <- data.frame(lapply(hrtDisease[,2:15], mean))
+avgAll <- pivot_longer(avgAll, 1:14, names_to = "year", values_to = "avgHrt")
+avgAll$year <- paste(sep = "", "20",substr(avgAll$year, 2, 4))
+
+ggplot(avgAll, aes(x = year, y = avgHrt, group=1, color="red")) + geom_line(linewidth = 2.4) + geom_point(
+  aes(fill="red"),
+  size = 5,
+  pch = 21, # Type of point that allows us to have both color (border) and fill.
+  colour = "#FFFFFF",
+  stroke = 1 # The width of the border, i.e. stroke.
+) + labs(title = paste(sep="", "Average Heart Disease Mortality of US Counties, 2006-2019"),
+         x = "Year",
+         y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9)
+         ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)  + coord_cartesian(ylim = c(65,80))
+
+ggplot(avgAll, aes(x = year, y = avgHrt, group=1, color="red")) + geom_line(linewidth = 2.4) + geom_point(
+  aes(fill="red"),
+  size = 5,
+  pch = 21, # Type of point that allows us to have both color (border) and fill.
+  colour = "#FFFFFF",
+  stroke = 1 # The width of the border, i.e. stroke.
+) + labs(title = paste(sep="", "Average Heart Disease Mortality of US Counties, 2006-2019"),
+         x = "Year",
+         y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9)
+         ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)  + coord_cartesian(ylim = c(0,85))
