@@ -31,7 +31,10 @@ ggplot(socialFactor, aes(x = Value)) + geom_histogram(data=socialFactor)
 
 # groups <- split(socialFactor, cut(dig.lab = 10, socialFactor$Value, 4))
 groups <- split(socialFactor, Hmisc::cut2(socialFactor$Value, g=4)) #even sized groups
-# special for urban-rural -> groups <- split(socialFactor, as.factor(socialFactor$Value))
+# special for urban-rural -> 
+# groups <- split(socialFactor, as.factor(socialFactor$Value))
+
+# names(groups) <- paste(sep = "", "(", substr(names(groups),2,5), "-", substr(names(groups), 7, 10), "%)")
 
 #from the groups, create a series that contains the year, the mean value of heart disease in each group, and the group that the data comes from
 
@@ -48,6 +51,8 @@ for(x in 1:length(groups)){
   }
 }
 
+cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#F0E442", "#0072B2", "#D55E00", "#999999")
+
 ggplot(plotSeries, aes(x = year, y = mean, group = group, color = group)) + geom_line(linewidth = 2.4) + geom_point(
   aes(fill = group), 
   size = 5, 
@@ -56,4 +61,5 @@ ggplot(plotSeries, aes(x = year, y = mean, group = group, color = group)) + geom
   stroke = 1 # The width of the border, i.e. stroke.
 ) + labs(title = paste(sep="", "Average HDM of County-Cohort Groups Based on ", factorName, ", 2006-2018"), 
          x = "Year", 
-         y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9))
+         y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9)
+    ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
