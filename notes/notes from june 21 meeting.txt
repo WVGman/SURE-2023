@@ -1,0 +1,5 @@
+notes from jun 21 meeting
+separate the DiD by low, medium, and high insurance counties
+power analysis would help with a lower sample size
+write a report
+look more into BRFSS report about obesity, why the dip?

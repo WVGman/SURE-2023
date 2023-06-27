@@ -1,0 +1,8 @@
+goals left over from the meeting:
+power analysis would help with a lower sample size
+look more into BRFSS report about obesity, why the dip?
+
+6/27
+goals:
+revise the report based on Palanki's feedback
+look into what wren said, compare geographically close states in order to have more valid assumptions. make a map of how much each state changed eligibility. using multiple case studies might make for an actually decent argument. however, will doing the DID with continuous treatment while the baseline differences are still there skew the result? i guess i could do a much more simple 2x2 DiD with continuous treatment, since i think that was one of the examples that callaway gave
