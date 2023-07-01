@@ -1,0 +1,2 @@
+#find full insurance and heart disease mortality plots from 2006-2018
+#code mostly taken from 'generate table 1.R' and 'create parallel trend graphs.R' from the Spring 2023 repo (terribly named files BTW)

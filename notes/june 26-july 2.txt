@@ -6,3 +6,17 @@ look more into BRFSS report about obesity, why the dip?
 goals:
 revise the report based on Palanki's feedback
 look into what wren said, compare geographically close states in order to have more valid assumptions. make a map of how much each state changed eligibility. using multiple case studies might make for an actually decent argument. however, will doing the DID with continuous treatment while the baseline differences are still there skew the result? i guess i could do a much more simple 2x2 DiD with continuous treatment, since i think that was one of the examples that callaway gave
+
+6/28
+had a meeting
+adding the SD to the mean population of counties is actually wild becuase the average is about 96K and the SD is 300k because of how absolutely huge some of the counties are, so the standard deviation goes into the negatives. fun!
+
+7/1
+yesterday i was really tired and didn't even go to the library, which i think is okay because i've been working a lot. i procrastinated for a little bit too long today but i'm ready now.
+
+goals:
+finish up the DID specification section
+add covariates, mention why we're using them
+add more positives of the methodology (mortality is a good metric compared to prevalence...)
+add a description of the results
+add the geographically-near states idea with different methodology, potentially could use the continuous treatment because the assumption is easier to make

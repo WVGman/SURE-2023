@@ -1,0 +1,13 @@
+6/28 notes
+
+talking points before:
+talk about the feedback
+comparing geographically-near states (wren)
+	summarized it as "we did a national analysis and found that the effect of medicaid is state specific, because the implementation was different depending on the state"
+	
+---------------------------------
+make the same plots for employment as you did for population
+add SD to the population averages, make the Y-axis go from 80k to 120k
+make it more like a story with the plots -> what are we using the covariates for? 
+add the description of the DiD equation, maybe reference the videos
+he liked the geographically-near state comparison idea 

@@ -95,3 +95,99 @@ for(x in 1:length(groups)){
   print("number of expansion counties:")
   print(dim(groupedTable %>% filter(REL_YEAR != Inf))[1]/10)
 }
+
+
+# looking at bacondecomp
+
+library(bacondecomp)
+
+#bacon decomp without controls
+
+df_bacon <- bacon(HRTDISEASE ~ TREATED,
+                  data = table,
+                  id_var = "GEO_ID",
+                  time_var = "YEAR")
+
+ggplot(df_bacon) +
+  aes(x = weight, y = estimate, shape = factor(type)) +
+  labs(x = "Weight", y = "Estimate", shape = "Type") +
+  geom_point()
+
+write_csv(df_bacon, "./baconDecomp/baconDecompNoControls.csv")
+
+#bacon decomp with pop and employ, no obesity
+
+df_bacon_controls <- bacon(HRTDISEASE ~ TREATED + LOGPOP + LOGEMPLOY,
+                  data = table,
+                  id_var = "GEO_ID",
+                  time_var = "YEAR")
+
+ggplot(df_bacon_controls$two_by_twos) +
+  aes(x = weight, y = estimate, shape = factor(type)) +
+  labs(x = "Weight", y = "Estimate", shape = "Type") +
+  geom_point()
+
+write_csv(as.data.frame(df_bacon_controls[1:2]), "./baconDecomp/baconDecompControlsNoObesityotherTwo.csv")
+write_csv(df_bacon_controls$two_by_twos, "./baconDecomp/baconDecompControlsNoObesity2x2.csv")
+
+#bacon decomp with pop, employ, and obesity
+
+df_bacon_controls <- bacon(HRTDISEASE ~ TREATED + LOGPOP + LOGEMPLOY + OBESITY,
+                           data = table,
+                           id_var = "GEO_ID",
+                           time_var = "YEAR")
+
+# using did2s event_study to compare all the estimators
+
+table <- table %>% filter(YEAR_TREATED < 2020)
+
+#without covariates
+
+studies <- event_study(data = table,
+                       yname = "HRTDISEASE",
+                       idname = "GEO_ID",
+                       gname = "YEAR_TREATED",
+                        tname = "YEAR",
+                       estimator = "all")
+
+plot_event_study(studies)
+
+#with covariates, no obesity
+
+
+
+studiesCo <- event_study(data = table,
+                       yname = "HRTDISEASE",
+                       idname = "GEO_ID",
+                       gname = "YEAR_TREATED",
+                       tname = "YEAR",
+                       estimator = "all",
+                       xformla = ~ LOGPOP + LOGEMPLOY)
+
+plots <- plot_event_study(studiesCo)
+
+for(i in 1:length(x)){
+  
+}
+
+studiesallCo <- event_study(data = table,
+                         yname = "HRTDISEASE",
+                         idname = "GEO_ID",
+                         gname = "YEAR_TREATED",
+                         tname = "YEAR",
+                         estimator = "all",
+                         xformla = ~ LOGPOP + LOGEMPLOY + OBESITY)
+
+plot_event_study(studiesallCo)
+
+print(studies$estimate - studiesCo$estimate)
+
+studiesCo <- event_study(data = table,
+                         yname = "HRTDISEASE",
+                         idname = "GEO_ID",
+                         gname = "YEAR_TREATED",
+                         tname = "YEAR",
+                         estimator = "all",
+                         xformla = ~ LOGPOP + LOGEMPLOY)
+
+plot_event_study(studiesCo)
