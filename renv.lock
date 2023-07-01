@@ -233,6 +233,16 @@
       ],
       "Hash": "c39fbec8a30d23e721980b8afb31984c"
     },
+    "bacondecomp": {
+      "Package": "bacondecomp",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "4a5dcfcb7c0ff3b6ea01ef9592ed89e0"
+    },
     "base64enc": {
       "Package": "base64enc",
       "Version": "0.1-3",
