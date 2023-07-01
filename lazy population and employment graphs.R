@@ -2,6 +2,7 @@ library(did)
 library(dplyr)
 library(readr)
 library(Hmisc)
+library(ggplot2)
 didTable <- read_csv("./formattedData/DidTable.csv")
 didTable$TREATED <- as.numeric(didTable$TREATED)
 
@@ -10,7 +11,7 @@ didTable$EMPLOY <- exp(didTable$LOGEMPLOY)
 as.data.frame(didTable) -> table
 
 years <- 2010:2019
-popTable <- data.frame(year = numeric(), meanPop = numeric(), medianPop = numeric(), meanEmploy = numeric(), medianEmploy = numeric(), group = character())
+statTable <- data.frame(year = numeric(), meanPop = numeric(), medianPop = numeric(), sdPop = numeric(), meanEmploy = numeric(), medianEmploy = numeric(), group = character())
 for(year in years){
   # # tCut <- split(filter(table, YEAR == year), cut2(filter(table, YEAR == 2010)$POP, g=10))
   # tCut <- split(filter(table, YEAR == year), cut2(filter(table, YEAR == 2010)$POP, c(0, 10000, 100000, 1000000)))
@@ -21,20 +22,21 @@ for(year in years){
   # }
   meanP <- mean(filter(table, YEAR == year)$POP)
   medianP <- median(filter(table, YEAR == year)$POP)
+  sdP <- sd(filter(table, YEAR == year)$POP)
   meanE <- mean(filter(table, YEAR == year)$EMPLOY)
   medianE <- median(filter(table, YEAR == year)$EMPLOY)
-  popTable <- popTable %>% add_row(year = year, meanPop = meanP, medianPop = medianP, meanEmploy = meanE, medianEmploy = medianE)
+  statTable <- statTable %>% add_row(year = year, meanPop = meanP, medianPop = medianP, sdPop = sdP, meanEmploy = meanE, medianEmploy = medianE)
 }
 
-popTable$year <- as.character(popTable$year)
+statTable$year <- as.character(statTable$year)
 
-ggplot(popTable, aes(x = year, y = meanPop)) + geom_line()
-ggplot(popTable, aes(x = year, y = medianPop, group = group)) + geom_line()
+ggplot(statTable, aes(x = year, y = meanPop)) + geom_line()
+ggplot(statTable, aes(x = year, y = medianPop, group = group)) + geom_line()
 
-ggplot(popTable, aes(x = year, y = meanEmploy)) + geom_line()
-ggplot(popTable, aes(x = year, y = medianEmploy, group = group)) + geom_line()
+ggplot(statTable, aes(x = year, y = meanEmploy)) + geom_line()
+ggplot(statTable, aes(x = year, y = medianEmploy, group = group)) + geom_line()
 
-ggplot(popTable, aes(x = year, y = meanPop, group = 1)) + geom_line(linewidth = 2.4, color = "red") + geom_point(
+ggplot(statTable, aes(x = year, y = meanPop, group = 1)) + geom_line(linewidth = 2.4, color = "red") + geom_point(
   fill = "red",
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
@@ -42,9 +44,9 @@ ggplot(popTable, aes(x = year, y = meanPop, group = 1)) + geom_line(linewidth = 
   stroke = 1 # The width of the border, i.e. stroke.
 ) + labs(title = paste(sep="", "Average Population of US Counties, 2010-2019"), 
          x = "Year", 
-         y = "Average Population") + theme(plot.title = element_text(size=14))
+         y = "Average Population") + theme(plot.title = element_text(size=14)) + coord_cartesian(ylim = c(70000,120000))
                                                                     
-ggplot(popTable, aes(x = year, y = medianPop, group = 1)) + geom_line(linewidth = 2.4, color = "lightblue") + geom_point(
+ggplot(statTable, aes(x = year, y = medianPop, group = 1)) + geom_line(linewidth = 2.4, color = "lightblue") + geom_point(
   fill = "lightblue",
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
@@ -54,25 +56,25 @@ ggplot(popTable, aes(x = year, y = medianPop, group = 1)) + geom_line(linewidth 
          x = "Year", 
          y = "Median Population") + theme(plot.title = element_text(size=14))
 
-ggplot(popTable, aes(x = year, y = meanEmploy, group = 1)) + geom_line(linewidth = 2.4, color = "red") + geom_point(
+ggplot(statTable, aes(x = year, y = meanEmploy, group = 1)) + geom_line(linewidth = 2.4, color = "red") + geom_point(
   fill = "red",
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
   colour = "#FFFFFF", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = paste(sep="", "Average Employment of US Counties, 2010-2019"), 
+) + labs(title = paste(sep="", "Average Number of People Employed in US Counties, 2010-2019"), 
          x = "Year", 
-         y = "Average Employment") + theme(plot.title = element_text(size=14))
+         y = "Average Number Employed") + theme(plot.title = element_text(size=14)) + coord_cartesian(ylim = c(70000,110000))
 
-ggplot(popTable, aes(x = year, y = medianEmploy, group = 1)) + geom_line(linewidth = 2.4, color = "lightblue") + geom_point(
+ggplot(statTable, aes(x = year, y = medianEmploy, group = 1)) + geom_line(linewidth = 2.4, color = "lightblue") + geom_point(
   fill = "lightblue",
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
   colour = "#FFFFFF", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = paste(sep="", "Median Employment of US Counties, 2010-2019"), 
+) + labs(title = paste(sep="", "Median Number of People Employed of US Counties, 2010-2019"), 
          x = "Year", 
-         y = "Median Employment") + theme(plot.title = element_text(size=14))
+         y = "Median Number Employed") + theme(plot.title = element_text(size=14))
 
 #find how many counties went up in population, how many went down
 startandend <- filter(table, YEAR == 2010 | YEAR == 2019)
