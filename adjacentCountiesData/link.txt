@@ -1,0 +1,4 @@
+FIPS info (hit United States): https://www.census.gov/library/reference/code-lists/ansi.html
+
+making the maps:
+https://www.mapchart.net/usa-counties.html

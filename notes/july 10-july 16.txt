@@ -1,5 +1,6 @@
 7/10
 states to potentially compare along their borders:
+looking at this: https://www.kff.org/medicaid/issue-brief/status-of-state-medicaid-expansion-decisions-interactive-map/
 (non-expanded(as of ~2019) vs expanded in 2014):
 tennessee & virginia vs kentucky
 idaho vs washington and oregon
