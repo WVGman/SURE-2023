@@ -1,0 +1,49 @@
+7/10
+states to potentially compare along their borders:
+(non-expanded(as of ~2019) vs expanded in 2014):
+tennessee & virginia vs kentucky
+idaho vs washington and oregon
+south dakota vs north dakota
+wisconsin vs minnesota, michigan, iowa, illinois
+texas vs new mexico, little bit of arkansas
+mississippi vs arkansas
+kansas vs colorado
+missouri(MO) vs illinois, iowa, arkansas
+nebraska vs iowa, colorado
+oklahoma vs arkansas
+
+shakier comparisons:
+four corners comparison(?)
+wyoming vs montana(2016)
+maine vs new hampshire(late 2014)
+mississippi(MS) vs louisiana(late 2016)
+virginia vs west virginia, maryland (WV because of mountains, maryland because of DC)
+utah vs nevada, colorado, arizona (utah's counties are just so huge)
+
+i feel like i need to define how I include and exclude counties, and also maybe weight counties differently if they sprawl far from the border
+i think a good enough metric is that if counties are touching the border, include them, unless they sprawl from the border by more than 50 miles
+(most counties are ~25 miles across so normally this isn't a problem, more applicable in the west where counties are 100+ miles across)
+also need to be wary of large cities (100k+), would probably distort the comparison
+
+looking for large urban areas:
+(https://www2.census.gov/geo/maps/DC2020/UA20/UA_2020_WallMap.pdf)
+tennessee & virginia vs kentucky
+	nashville & clarksville are urban areas
+idaho vs washington and oregon
+	boise city, spokane
+south dakota vs north dakota
+	none
+wisconsin vs minnesota, michigan, iowa, illinois
+	minneapolis, chicago, duluth?
+texas vs new mexico, little bit of arkansas
+	el paso, texarkana?
+mississippi vs arkansas
+	none
+kansas vs colorado
+	zip
+missouri(MO) vs illinois, iowa, arkansas
+	st louis, none for iowa, fayetteville for AR
+nebraska vs iowa, colorado
+	omaha for iowa, none for colorado (kinda large counties though)
+oklahoma vs arkansas
+	fayetteville, fort smith, maybe tulsa? but i doubt it

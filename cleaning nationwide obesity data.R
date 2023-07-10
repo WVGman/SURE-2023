@@ -22,7 +22,8 @@ obesityLong <- obesityLong %>%
   mutate(obesity = na.approx(obesity)) %>%
   mutate(severeObesity = na.approx(severeObesity))
 
-obesityLong <- obesityLong %>% add_row(data.frame(year = as.character(2019), obesity = (2*obesityLong$obesity[19])-obesityLong$obesity[18], severeObesity = (2*obesityLong$severeObesity[19])-obesityLong$severeObesity[18]))
+#add 2019, assuming no change from the previous year
+obesityLong <- obesityLong %>% add_row(data.frame(year = as.character(2019), obesity = obesityLong$obesity[20], severeObesity = obesityLong$severeObesity[20]))
 
 plot(obesityLong$obesity)
 plot(obesityLong$severeObesity)
@@ -32,3 +33,24 @@ obesityLong$year <- NULL
 obesityFinal <- as.data.frame(t(obesityLong))
 
 write.csv(obesityFinal, "./formattedData/nationwideObesityByYear1999-2018.csv")
+
+#plot obesity
+obesityLong$year <- row.names(obesityLong)
+# ggplot(obesityLong, aes(x = year, y = obesity)) + geom_point()
+# 
+# #convert year to be e.g. '02, but i need to make a factor in the correct order, otherwise '99 is after everything else
+# obesityLong$year <- paste(sep="", "'", substr(obesityLong$year, 3, 4))
+# obesityLong$year <- factor(obesityLong$year, levels = obesityLong$year)
+
+#remove years up to 2010
+obesityLong <- obesityLong %>% filter(year >= 2010)
+
+ggplot(obesityLong, aes(x = year, y = obesity, group = 1)) + geom_line(linewidth = 2.4, color = "brown") + geom_point(
+  fill = "brown", 
+  size = 5, 
+  pch = 21, # Type of point that allows us to have both color (border) and fill.
+  colour = "#FFFFFF", 
+  stroke = 1 # The width of the border, i.e. stroke.
+) + labs(title = "Nationwide Obesity Prevalence, 2010-2019", 
+         x = "Year", 
+         y = "Nationwide Obesity Prevalence (%)") + theme(plot.title = element_text(size=12))

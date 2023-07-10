@@ -1,0 +1,26 @@
+7/7
+investigating a few things right now:
+-do we even have parallel trends in this context?
+	-looking at this: https://www.youtube.com/watch?v=F8C1xaPoRvM&list=PLVObvb_htcuBt8mV9yNagt7hK9FL5KXeE&index=4
+	-talks about the tests for parallel trends, the pretrends test being potentially faulty, and ways that you could still find some results depending on if you want to assume a non-parallel trend
+	-uses HonestDiD package in R, should probably look into this, as well as pretrends package in R
+	-requires more thinking about the influences on heart disease mortality, and what a predicted trend could look like (i don't know)
+	-will watch this tonight: https://www.youtube.com/watch?v=6-NkiA2jN7U
+-looking at adjacent or geographically-near state groups for comparisons, is this a good idea or does it reduce my power too much?
+-power analysis, how can we simulate the 2014 changes? can we simulate staggered changes as well? does using our actual data for a simulation make sense to do, given the change in trend?
+-why is there a bump in the did estimate graph at REL_YEAR -4?
+-what are synthetic controls (mentioned at the end of Roth's parallel trends video)? should I try to use that method?
+	according to Roth (kind of), DiD and synthetic controls has sort of independently developed, and their researchers haven't really interacted much or considered each other very often
+	
+7/8
+watched this video on synthetic control: https://www.youtube.com/watch?v=KgfPTLqjUEE
+essentially the idea is to create a counterfactual by finding many matching untreated groups and doing a weighted average, with the weights coming from minimizing the difference between the treatment group and the untreated group before the treatment happens
+this requires a bunch of data on the features that could potentially influence the outcome, weighting those features on importance, then minimizing
+i think it could be possible with our dataset, but we would need more factors, and also I think comparing counties that are directly near each other is a good idea
+for example, comparing the bottom of kentucky to the top of tennessee, removing counties that are outliers in population or urbanness, or something like that. it's gonna be hard though
+------------------------------------------
+had a dizzying afternoon sorting through more papers n' stuff
+(taken from SURE timesheet): watched this video (https://www.youtube.com/watch?v=r2DzGAigTl4) about a relatively recent paper and recent new estimator called synthetic difference-in-differences, and a lot of the problems that I had with DiD seem moderately addressed by this estimator. I do worry that because some of the intuition is based on TWFE, that similar distortions and bias from staggered treatments will also occur in the SDID, maybe I'll ask Goodman-Bacon or try to find someone talking about that online. the paper seems highly cited (>170 citations), but obviously that doesn't give it credibility. I think I need to read/watch this paper next because somehow I missed this entire synthetic controls idea
+
+after some more searching, I found this paper (https://www.sciencedirect.com/science/article/abs/pii/S0165176522003482) talking about staggered SDID. he made an R library (https://github.com/zachporreca/staggered_adoption_synthdid) but actually recommends this library because its more up-to-date (https://github.com/TJhon/ssynthdid)
+	fun fact about zachary porreca, he actually got his master's and his doctorate in ecomonics from WVU
