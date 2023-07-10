@@ -45,7 +45,7 @@ for(i in 1:length(counties[[1]])){
   }
   fipMatches <- c(fipMatches, FIP)
 }
-counties$fipMatches <- fipMatches
+counties$fipMatches <- as.numeric(fipMatches)
 #adding norton's FIP 
 counties$fipMatches[39] <- 51720
 
@@ -58,3 +58,13 @@ plot_usmap(regions = "counties", include = counties$fipMatches) +
        subtitle = "wowza!") + 
   theme(panel.background=element_blank())
 #wow, actually really easy!
+
+#change it to include the full states in the cohort, and fill the correct counties
+countyFill <- data.frame(fips = counties$fipMatches, values = 1)
+plot_usmap(data = countyFill, regions = "states", include = unique(counties$stateAbb)) + 
+  labs(title = "counties i chose",
+       subtitle = "wowza!") + 
+  theme(panel.background=element_blank()) + plot_usmap(regions="states", include = unique(counties$stateAbb))
+
+# RShowDoc("mapping", package = "usmap")
+# RShowDoc("advanced-mapping", package = "usmap")
