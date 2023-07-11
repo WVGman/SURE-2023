@@ -48,3 +48,18 @@ nebraska vs iowa, colorado
 	omaha for iowa, none for colorado (kinda large counties though)
 oklahoma vs arkansas
 	fayetteville, fort smith, maybe tulsa? but i doubt it
+	
+7/11
+i want to get some analysis going for the maps that I make
+
+make both map-based plots and the normal XY-coordinate time series graphs:
+plot heart disease mortality levels
+plot insurance levels
+
+also potentially look into some sort of representation comparing these counties to the rest of the nation based on population, employment, HDM, insurance, etc (population density?)
+
+sessions (only 4 because I started really late):
+1: plots
+2: plots
+3: unintentional second look at synthetic DID as I question this methodology!
+4: try using the synthetic DID library on all the data, excluding the staggered states, and see what you get (just a curiosity)
