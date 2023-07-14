@@ -63,3 +63,14 @@ sessions (only 4 because I started really late):
 2: plots
 3: unintentional second look at synthetic DID as I question this methodology!
 4: try using the synthetic DID library on all the data, excluding the staggered states, and see what you get (just a curiosity)
+
+7/12
+ugh apparently old me missed that there are population estimates per county before 2010 (duh!), so I could redo the DiDTable to include 4 more years, which is probably a good idea! (https://www.census.gov/data/datasets/time-series/demo/popest/intercensal-2000-2010-counties.html)
+https://www.bls.gov/lau/tables.htm#mcounty
+
+so, add onto the tasks: create a new full didtable with 2006 to 2019 data
+
+i'm just gonna make all the county groups now
+
+7/14
+finished up the code that compares the adjacent states, I have all the maps and plots done but not the 

@@ -191,3 +191,19 @@ studiesCo <- event_study(data = table,
                          xformla = ~ LOGPOP + LOGEMPLOY)
 
 plot_event_study(studiesCo)
+
+
+########################
+#synthetic control
+library(synthdid)
+#trying out a synth did to see what difference it makes
+#https://synth-inference.github.io/synthdid/articles/synthdid.html
+synthTable <- filter(table, YEAR_TREATED == 0 | YEAR_TREATED == 2014 | YEAR_TREATED > 2018)
+synthTable[synthTable$YEAR_TREATED>2018,]$TREATED <- 0
+setup <- synthdid::panel.matrices(as.data.frame(synthTable), unit = 1, time = 2, treatment = 3, outcome = 6)
+tau.hat = synthdid_estimate(setup$Y, setup$N0, setup$T0)
+print(x <- summary(tau.hat))
+synthdid_plot(tau.hat)
+synthdid_plot(tau.hat, overlay = 1)
+y <- synthdid_controls(tau.hat)
+synthdid_units_plot(tau.hat)

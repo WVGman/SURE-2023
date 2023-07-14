@@ -1,3 +1,5 @@
+#IMPORTANT NOTE: this script was generalized to import multiple files at the same time, see "comparing adjacent counties separate script.R"
+
 #the idea is to compare adjacent, or geographically-near counties that are different in treatment
 #for example, kentucky expanded medicaid, but tennessee did not.
 #if we compare the counties that touch the kentucky-tennessee border,
@@ -8,7 +10,8 @@ library(jsonlite)
 library(stringr)
 library(dplyr)
 library(readr)
-readIn <- read_json(r"(.\adjacentCountiesData\tennessee & virginia vs kentucky.txt)")
+# readIn <- read_json(r"(.\adjacentCountiesData\tennessee & virginia vs kentucky.txt)")
+readIn <- read_json(r"(.\adjacentCountiesData\fullStateComparisons\tennessee vs kentucky full.txt)")
 
 #create a standardized list of counties based on the MapChart JSON file
 #comes from https://www.mapchart.net/usa-counties.html
@@ -48,7 +51,8 @@ for(i in 1:length(counties[[1]])){
 }
 counties$fipMatches <- as.numeric(fipMatches)
 #adding norton's FIP 
-counties$fipMatches[39] <- 51720
+# counties$fipMatches[39] <- 51720
+counties$fipMatches[counties$countyName=="Van_Buren"] <- 47175
 
 ################################################
 #trying to plot counties
@@ -121,7 +125,7 @@ ggplot(hdmPlotSeries, aes(x = year, y = meanValue, group = group, color = group)
 ) + labs(title = paste(sep="", "Average Heart Disease Mortality of Selected Counties Based on Medicaid Expansion Status, 2010-2019"), 
          x = "Year", 
          y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=8)
-         ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette) + geom_ribbon(aes(ymin = meanValue - sd, ymax = meanValue + sd), fill = "pink", alpha=0.2)
+         ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
 #ok... weird HDM plot, looks like theres a huge SD for both groups, so i guess it's time to make some maps to see what's happening
 
 years <- unique(combinedList$YEAR)
@@ -169,7 +173,6 @@ plot_usmap(data = df, regions = "states", include = unique(counties$stateAbb)) +
   theme(panel.background=element_blank()) + scale_fill_continuous(
     low = "green", high = "red", name = "% Change in HDM")  + theme(legend.position = "right")
 
-
 #same, but for insurance instead
 # Filter the rows where YEAR is either 2010 or 2019
 df <- filter(combinedList, YEAR %in% c(2010,2019))
@@ -208,3 +211,19 @@ tau.hat = synthdid_estimate(setup$Y, setup$N0, setup$T0)
 print(summary(tau.hat))
 synthdid_plot(tau.hat)
 synthdid_plot(tau.hat, overlay = 1)
+
+
+
+
+
+###########################################################################
+###########################################################################
+###########################################################################
+###########################################################################
+###########################################################################
+#I genera
+
+
+
+
+
