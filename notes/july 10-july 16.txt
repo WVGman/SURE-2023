@@ -73,4 +73,30 @@ so, add onto the tasks: create a new full didtable with 2006 to 2019 data
 i'm just gonna make all the county groups now
 
 7/14
-finished up the code that compares the adjacent states, I have all the maps and plots done but not the 
+finished up the code that compares the adjacent states, I have all the maps and plots
+
+need to do the synthetic DID for all the groups, then send some results and thoughts to Dr. Palanki
+	will require figuring out covariates ughh
+might need to make the groups larger idk
+also need to make the table go farther back
+
+from now until 5pm I will work on extending the DiDTable back to 2006, ignoring my eagerness to try to add more stuff to it
+
+i really should add average income and diabetes though
+
+7/16
+we're kind of in the endgame for the poster game, so I need to decide on the last few analysis items and then work on making this poster beautiful
+
+goals until friday:
+
+I think a good goal would be to add median income levels into the nationwide analysis, so I can say I included some socioeconomic factor, since that was one piece of feedback that I got last time and I didn't have a good explanation for. it shouldn't be that hard to add it to the didTable, and then to the analysis.
+
+I would also like to do a synthetic DID nationally including covariates, but i don't know if that's attainable or useful. how would I explain why I used it on the poster?
+
+I need to consider the change in insurance levels for the smaller adjacent comparisons (KFF table). do the ones that show an increase in mortality levels have a smaller or negligible treatment?
+	or perhaps 
+
+---------------------------------
+new idea from wren: compare the amount of public insurance money spent on heart disease to the level of heart disease
+
+plot change in heart disease and insurance for the whole nation
