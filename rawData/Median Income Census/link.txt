@@ -1,0 +1,1 @@
+https://data.census.gov/table?q=income+county&tid=ACSST1Y2010.S1903

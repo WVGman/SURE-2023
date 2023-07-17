@@ -1,0 +1,22 @@
+7/17
+goal today: redo the nationwide two-stage analysis with median income as the covariate
+extra cherry on top: same thing but with the smaller adjacent groups
+
+sessions:
+1: look for any data before 2010 for 20 mins, if no data, import the median income data, clean it, add it to the didTable. if there is data, make a new didTable with data from 2006-2018
+didn't finish didTable, but did clean the data pretty easily with dplyr functions
+
+future work:
+SDID with staggered treatment on a national scale (https://github.com/TJhon/ssynthdid)
+look more into HonestDID (https://asheshrambachan.github.io/assets/files/hpt-draft.pdf, https://www.youtube.com/watch?v=6-NkiA2jN7U)
+heterogeneous treatment sizes (countinuous treatment)
+	
+
+general note:
+i don't know how to organize myself very well, i think i need a better system, but I don't know what
+maybe I need to do something where I can infodump into a document, and then at the end of each day I do a summary of the major findings. i kind of already do that, but not super well because things fall through the cracks. i also need a way to keep my priorities straight-- i think something like a physical whiteboard would be useful for future projects
+
+7/18
+make nationwide maps of change in heart disease mortality and change in insurance coverage from 2010 to 2019
+look at the actual change in insurance coverage in the adjacent groups
+start on the poster
