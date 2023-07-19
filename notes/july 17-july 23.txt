@@ -20,3 +20,22 @@ maybe I need to do something where I can infodump into a document, and then at t
 make nationwide maps of change in heart disease mortality and change in insurance coverage from 2010 to 2019
 look at the actual change in insurance coverage in the adjacent groups
 start on the poster
+
+it's now the 18th
+i have a new idea, instead make a scatterplot comparing the change in heart disease mortality compared to the change in insurance coverage, to show a correlation
+ok i'm doin that real quick, the SDID stuff is laggy
+ah mann these scatterplots SUCK. maybe i could use it on my poster as an illustration of why the problem is difficult to solve idk
+
+ok i need to figure out my narrative for my poster, what do I want to emphasize?
+
+-nationally, states that expanded medicaid had significant reductions in heart disease mortality compared to states that did not expand medicaid
+
+7/19
+found a picture of scripps posters (https://www.scripps.edu/_files/pdfs/science-medicine/translational-institute/2022-End-of-Program-Intern-Poster-Symposium.pdf), i saw a poster that had a gradient to signify the increasing complexity of methodology in their study design, and I think that's genius (top left-ish)
+I also like how clean the posters look in general
+
+make a virginia vs west virginia comparison for the poster
+maybe a whole appalachia analysis, or even find a healthcare region map by some accredited institution
+
+census regions: https://www.cdc.gov/nchs/hus/sources-definitions/geographic-region.htm#Figure
+BEA regions: https://apps.bea.gov/regional/docs/msalist.cfm?mlist=2 (https://upload.wikimedia.org/wikipedia/commons/b/b7/BEA_regions.png)

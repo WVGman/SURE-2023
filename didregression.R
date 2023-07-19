@@ -31,14 +31,27 @@ ggdid(agged)
 # t <- aggte(formula = HRTDISEASE ~ TREATED | YEAR, id = GEO_ID, data = didTable)
 library(did2s)
 # first_stage = ~ 0 | region^time + group^time + group^region
+
+#move the counties that expanded in 2019 & 2018 to not expanded
+#this is because those counties in the -9 and -8 REL_YEAR made weird coefficient estimates
+#and these weren't really representative of the counties as a whole because there are
+#only 282 of them, so moving them out helps with that
+table$REL_YEAR[table$YEAR_TREATED >= 2018] <- Inf
 reg <- did2s(table, 
       yname = "HRTDISEASE",
-      first_stage = ~ LOGPOP + LOGEMPLOY + OBESITY | GEO_ID + YEAR,
+      first_stage = ~ LOGPOP + LOGEMPLOY + OBESITY + MEDIANINCOME| GEO_ID + YEAR,
       # first_stage = ~ 0 | GEO_ID + YEAR,
       second_stage = ~i(REL_YEAR, ref= c(Inf)),
       treatment = "TREATED",
       cluster_var = "GEO_ID", verbose = TRUE)
 
+reg <- did2s(table, 
+             yname = "HRTDISEASE",
+             first_stage = ~ MEDIANINCOME | GEO_ID + YEAR,
+             # first_stage = ~ 0 | GEO_ID + YEAR,
+             second_stage = ~i(REL_YEAR, ref= c(Inf)),
+             treatment = "TREATED",
+             cluster_var = "GEO_ID", verbose = TRUE)
 
 #     bootstrap = TRUE,
 # n_bootstraps = 50
@@ -47,9 +60,9 @@ reg <- did2s(table,
 
 fixest::coefplot(
   reg,
-  main = "Event study: Staggered treatment",
-  xlab = "Relative time to treatment",
-  col = "steelblue", ref.line = -0.5
+  main = "Estimated Effect of Medicaid On Heart Disease Mortality",
+  xlab = "Relative Number of Years From Medicaid Expansion",
+  col = "turquoise4", lwd = 2
 )
 esttable(reg)
 # summary(reg)
@@ -207,3 +220,22 @@ synthdid_plot(tau.hat)
 synthdid_plot(tau.hat, overlay = 1)
 y <- synthdid_controls(tau.hat)
 synthdid_units_plot(tau.hat)
+
+#attempt to add median income to the SDID regression
+
+library(tidyr)
+covariateTable <- select(table, c(`GEO_ID`, `YEAR`, `MEDIANINCOME`)) %>% pivot_wider(names_from= "YEAR", values_from = "MEDIANINCOME")
+covariateTable <- as.data.frame(covariateTable)
+filter(covariateTable, GEO_ID %in% rownames(setup$Y))
+rownames(covariateTable) <- covariateTable$GEO_ID
+covariateTable <- covariateTable[match(rownames(setup$Y), rownames(covariateTable)), ]
+covariateTable$GEO_ID <- NULL
+# covariateArray <- array(as.list(covariateTable, all.names = TRUE))
+# View(array(covariateTable, dim = c(1, 10, 2807)))
+mCT <- as.matrix(covariateTable)
+mCT <- log(mCT)
+
+tau.hat2 = synthdid_estimate(setup$Y, setup$N0, setup$T0, X = mCT)
+print(x2 <- summary(tau.hat2))
+synthdid_plot(tau.hat2)
+y2 <- synthdid_controls(tau.hat2)

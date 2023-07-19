@@ -92,123 +92,123 @@ for(path in paths){
   combinedList$YEAR <- as.character(combinedList$YEAR) #fixes graph
   
   
-  # years <- unique(combinedList$YEAR)
-  # hdmPlotSeries <- data.frame(year = character(), meanValue = numeric(), sd = numeric(), group = character())
-  # groups <- c("Expanded Medicaid", "Did Not Expand Medicaid")
-  # for(y in years){
-  #   for(g in groups){
-  #     filteredByYearGroup <- combinedList %>% filter(YEAR == y & GROUP == g)
-  #     hdmPlotSeries <- add_row(hdmPlotSeries, year = y, meanValue = mean(filteredByYearGroup$HRTDISEASE), sd = sd(filteredByYearGroup$HRTDISEASE), group = g)
-  #   }
-  # }
-  # 
-  # # ggplot(hdmPlotSeries, aes(x = year, y = meanValue, group = group))
-  # 
-  # cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#F0E442", "#0072B2", "#D55E00", "#999999")
-  # 
-  # ggplot(hdmPlotSeries, aes(x = year, y = meanValue, group = group, color = group)) + geom_line(linewidth = 2.4) + geom_point(
-  #   aes(fill = group), 
-  #   size = 5, 
-  #   pch = 21, # Type of point that allows us to have both color (border) and fill.
-  #   colour = "#FFFFFF", 
-  #   stroke = 1 # The width of the border, i.e. stroke.
-  # ) + labs(title = paste(sep="", "Average Heart Disease Mortality of Selected Counties Based on Medicaid Expansion Status, 2010-2019"), 
-  #          x = "Year", 
-  #          y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=8)
-  #          ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
-  # 
-  # ggsave(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "hdmPlot", pathNoTxt, ".pdf"),  # jpg, png, eps, tex, etc.
-  #        plot = last_plot(), # or an explicit ggplot object name,
-  #        width = 7, height = 5, 
-  #        units = "in", # other options c("in", "cm", "mm"), 
-  #        dpi = 300)
-  # 
-  # years <- unique(combinedList$YEAR)
-  # insurancePlotSeries <- data.frame(year = character(), meanValue = numeric(), group = character())
-  # groups <- c("Expanded Medicaid", "Did Not Expand Medicaid")
-  # for(y in years){
-  #   for(g in groups){
-  #     filteredByYearGroup <- combinedList %>% filter(YEAR == y & GROUP == g)
-  #     insurancePlotSeries <- add_row(insurancePlotSeries, year = y, meanValue = mean(filteredByYearGroup$INSURANCERATE), group = g)
-  #   }
-  # }
-  # 
-  # ggplot(insurancePlotSeries, aes(x = year, y = meanValue, group = group, color = group)) + geom_line(linewidth = 2.4) + geom_point(
-  #   aes(fill = group), 
-  #   size = 5, 
-  #   pch = 21, # Type of point that allows us to have both color (border) and fill.
-  #   colour = "#FFFFFF", 
-  #   stroke = 1 # The width of the border, i.e. stroke.
-  # ) + labs(title = paste(sep="", "Average Percent of People Covered by Insurance of Selected Counties Based on Medicaid Expansion Status, 2010-2019"), 
-  #          x = "Year", 
-  #          y = "% Covered by Insurance") + theme(plot.title = element_text(size=8)
-  #          ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
-  # 
-  # ggsave(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "insurancePlot", pathNoTxt, ".pdf"),  # jpg, png, eps, tex, etc.
-  #        plot = last_plot(), # or an explicit ggplot object name,
-  #        width = 7, height = 5, 
-  #        units = "in", # other options c("in", "cm", "mm"), 
-  #        dpi = 300)
-  # 
-  # ############################################
-  # #plotting HDM and insurance on maps
-  # library(usmap)
-  # 
-  # #bing AI code btw, fun!
-  # #find the change in HDM from 2010 to 2019, then plot it on the map
-  # # Filter the rows where YEAR is either 2010 or 2019
-  # df <- filter(combinedList, YEAR %in% c(2010,2019))
-  # 
-  # # Group by GEO_ID and calculate the difference in HRTDISEASE between 2010 and 2019
-  # df <- df %>%
-  #   group_by(GEO_ID) %>%
-  #   summarize(change = (HRTDISEASE[YEAR == 2019] - HRTDISEASE[YEAR == 2010])/HRTDISEASE[YEAR == 2010] * 100)
-  # 
-  # # Rename the columns for plot_usmap
-  # df <- df %>%
-  #   rename(fips = GEO_ID, values = change)
-  # 
-  # p <- plot_usmap(data = df, regions = "states", include = unique(counties$stateAbb)) + 
-  #   labs(title = "Heart Disease Mortality Change from 2010 to 2019 by County") + 
-  #   theme(panel.background=element_blank()) + scale_fill_gradient2(low = "#005696", high = "#8E063B", mid = "lightgrey", midpoint = 0, name = "% Change in HDM", limits = c(-55, 80)) + theme(legend.position = "right")
-  # plot(p)
-  # pdf(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "HDMMap", pathNoTxt, ".pdf"), width = 7, height = 5)
-  # print(p)
-  # dev.off()
-  # 
-  # #same, but for insurance instead
-  # # Filter the rows where YEAR is either 2010 or 2019
-  # df <- filter(combinedList, YEAR %in% c(2010,2019))
-  # 
-  # # Group by GEO_ID and calculate the difference in HRTDISEASE between 2010 and 2019
-  # df <- df %>%
-  #   group_by(GEO_ID) %>%
-  #   summarize(change = (INSURANCERATE[YEAR == 2019] - INSURANCERATE[YEAR == 2010])/INSURANCERATE[YEAR == 2010] * 100)
-  # 
-  # # Rename the columns for plot_usmap
-  # df <- df %>%
-  #   rename(fips = GEO_ID, values = change)
-  # 
-  # p <- plot_usmap(data = df, regions = "states", include = unique(counties$stateAbb)) + 
-  #   labs(title = "Insurance Coverage Change from 2010 to 2019 by County") + 
-  #   theme(panel.background=element_blank()) + scale_fill_gradient2(high = "#005696", low = "#8E063B", mid = "lightgrey", midpoint = 0, name = "% Change in Insurance Coverage", limits = c(-30, 30)) + theme(legend.position = "right")
-  # # scale_fill_gradientn(
-  # #   colors=viridis(3, option = "viridis"), name = "% Change in Insurance Coverage", limits = c(-10, 30))
-  # pdf(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "InsuranceMap", pathNoTxt, ".pdf"), width = 7, height = 5)
-  # plot(p)
-  # dev.off()
-  # #also plot the treatment (just for being obvious)
-  # 
-  # 
-  # 
-  # treatment <- combinedList %>% group_by(GEO_ID) %>% summarize(expanded = ifelse((sum(TREATED) > 4), "Expanded", "Did Not Expand")) %>% rename(fips = GEO_ID, values = expanded)
-  # p <- plot_usmap(data = treatment, regions = "states", include = unique(counties$stateAbb)) + 
-  #   labs(title = "Medicaid Expansion Status by County") + 
-  #   theme(panel.background=element_blank()) + theme(legend.position = "right")
-  # pdf(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "TreatmentMap", pathNoTxt, ".pdf"), width = 7, height = 5)
-  # plot(p)
-  # print(p)
-  # dev.off()
+  years <- unique(combinedList$YEAR)
+  hdmPlotSeries <- data.frame(year = character(), meanValue = numeric(), sd = numeric(), group = character())
+  groups <- c("Expanded Medicaid", "Did Not Expand Medicaid")
+  for(y in years){
+    for(g in groups){
+      filteredByYearGroup <- combinedList %>% filter(YEAR == y & GROUP == g)
+      hdmPlotSeries <- add_row(hdmPlotSeries, year = y, meanValue = mean(filteredByYearGroup$HRTDISEASE), sd = sd(filteredByYearGroup$HRTDISEASE), group = g)
+    }
+  }
+
+  # ggplot(hdmPlotSeries, aes(x = year, y = meanValue, group = group))
+
+  cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#F0E442", "#0072B2", "#D55E00", "#999999")
+
+  ggplot(hdmPlotSeries, aes(x = year, y = meanValue, group = group, color = group)) + geom_line(linewidth = 2.4) + geom_point(
+    aes(fill = group),
+    size = 5,
+    pch = 21, # Type of point that allows us to have both color (border) and fill.
+    colour = "#FFFFFF",
+    stroke = 1 # The width of the border, i.e. stroke.
+  ) + labs(title = paste(sep="", "Average Heart Disease Mortality of Selected Counties Based on Medicaid Expansion Status, 2010-2019"),
+           x = "Year",
+           y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=8)
+           ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
+
+  ggsave(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "hdmPlot", pathNoTxt, ".pdf"),  # jpg, png, eps, tex, etc.
+         plot = last_plot(), # or an explicit ggplot object name,
+         width = 7, height = 5,
+         units = "in", # other options c("in", "cm", "mm"),
+         dpi = 300)
+
+  years <- unique(combinedList$YEAR)
+  insurancePlotSeries <- data.frame(year = character(), meanValue = numeric(), group = character())
+  groups <- c("Expanded Medicaid", "Did Not Expand Medicaid")
+  for(y in years){
+    for(g in groups){
+      filteredByYearGroup <- combinedList %>% filter(YEAR == y & GROUP == g)
+      insurancePlotSeries <- add_row(insurancePlotSeries, year = y, meanValue = mean(filteredByYearGroup$INSURANCERATE), group = g)
+    }
+  }
+
+  ggplot(insurancePlotSeries, aes(x = year, y = meanValue, group = group, color = group)) + geom_line(linewidth = 2.4) + geom_point(
+    aes(fill = group),
+    size = 5,
+    pch = 21, # Type of point that allows us to have both color (border) and fill.
+    colour = "#FFFFFF",
+    stroke = 1 # The width of the border, i.e. stroke.
+  ) + labs(title = paste(sep="", "Average Percent of People Covered by Insurance of Selected Counties Based on Medicaid Expansion Status, 2010-2019"),
+           x = "Year",
+           y = "% Covered by Insurance") + theme(plot.title = element_text(size=8)
+           ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
+
+  ggsave(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "insurancePlot", pathNoTxt, ".pdf"),  # jpg, png, eps, tex, etc.
+         plot = last_plot(), # or an explicit ggplot object name,
+         width = 7, height = 5,
+         units = "in", # other options c("in", "cm", "mm"),
+         dpi = 300)
+
+  ############################################
+  #plotting HDM and insurance on maps
+  library(usmap)
+
+  #bing AI code btw, fun!
+  #find the change in HDM from 2010 to 2019, then plot it on the map
+  # Filter the rows where YEAR is either 2010 or 2019
+  df <- filter(combinedList, YEAR %in% c(2010,2019))
+
+  # Group by GEO_ID and calculate the difference in HRTDISEASE between 2010 and 2019
+  df <- df %>%
+    group_by(GEO_ID) %>%
+    summarize(change = (HRTDISEASE[YEAR == 2019] - HRTDISEASE[YEAR == 2010])/HRTDISEASE[YEAR == 2010] * 100)
+
+  # Rename the columns for plot_usmap
+  df <- df %>%
+    rename(fips = GEO_ID, values = change)
+
+  p <- plot_usmap(data = df, regions = "states", include = unique(counties$stateAbb)) +
+    labs(title = "Heart Disease Mortality Change from 2010 to 2019 by County") +
+    theme(panel.background=element_blank()) + scale_fill_gradient2(low = "#005696", high = "#8E063B", mid = "lightgrey", midpoint = 0, name = "% Change in HDM", limits = c(-55, 80)) + theme(legend.position = "right")
+  plot(p)
+  pdf(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "HDMMap", pathNoTxt, ".pdf"), width = 7, height = 5)
+  print(p)
+  dev.off()
+
+  #same, but for insurance instead
+  # Filter the rows where YEAR is either 2010 or 2019
+  df <- filter(combinedList, YEAR %in% c(2010,2019))
+
+  # Group by GEO_ID and calculate the difference in HRTDISEASE between 2010 and 2019
+  df <- df %>%
+    group_by(GEO_ID) %>%
+    summarize(change = (INSURANCERATE[YEAR == 2019] - INSURANCERATE[YEAR == 2010])/INSURANCERATE[YEAR == 2010] * 100)
+
+  # Rename the columns for plot_usmap
+  df <- df %>%
+    rename(fips = GEO_ID, values = change)
+
+  p <- plot_usmap(data = df, regions = "states", include = unique(counties$stateAbb)) +
+    labs(title = "Insurance Coverage Change from 2010 to 2019 by County") +
+    theme(panel.background=element_blank()) + scale_fill_gradient2(high = "#005696", low = "#8E063B", mid = "lightgrey", midpoint = 0, name = "% Change in Insurance Coverage", limits = c(-30, 30)) + theme(legend.position = "right")
+  # scale_fill_gradientn(
+  #   colors=viridis(3, option = "viridis"), name = "% Change in Insurance Coverage", limits = c(-10, 30))
+  pdf(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "InsuranceMap", pathNoTxt, ".pdf"), width = 7, height = 5)
+  plot(p)
+  dev.off()
+  #also plot the treatment (just for being obvious)
+
+
+
+  treatment <- combinedList %>% group_by(GEO_ID) %>% summarize(expanded = ifelse((sum(TREATED) > 4), "Expanded", "Did Not Expand")) %>% rename(fips = GEO_ID, values = expanded)
+  p <- plot_usmap(data = treatment, regions = "states", include = unique(counties$stateAbb)) +
+    labs(title = "Medicaid Expansion Status by County") +
+    theme(panel.background=element_blank()) + theme(legend.position = "right")
+  pdf(paste(sep = "", "adjacentCountiesData/fullStateComparisons/plots/", "TreatmentMap", pathNoTxt, ".pdf"), width = 7, height = 5)
+  plot(p)
+  print(p)
+  dev.off()
   
   library(synthdid)
   # #trying out a synth did to see what difference it makes
