@@ -41,7 +41,7 @@ census regions: https://www.cdc.gov/nchs/hus/sources-definitions/geographic-regi
 BEA regions: https://apps.bea.gov/regional/docs/msalist.cfm?mlist=2 (https://upload.wikimedia.org/wikipedia/commons/b/b7/BEA_regions.png)
 
 7/20
-check sure timesheet for notes
+check git commit on the 21st for deetz
 
 7/21
 ok time to actually design the poster, will just throw stuff in and then modify later
