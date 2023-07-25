@@ -1017,13 +1017,13 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.8.4",
+      "Version": "1.8.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "methods"
       ],
-      "Hash": "a4269a09a9b865579b2635c77e572374"
+      "Hash": "266a20443ca13c65688b2116d5220f76"
     },
     "knitr": {
       "Package": "knitr",
@@ -1174,6 +1174,17 @@
         "methods"
       ],
       "Hash": "6dfe8bf774944bd5595785e3229d8771"
+    },
+    "mvtnorm": {
+      "Package": "mvtnorm",
+      "Version": "1.2-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "stats"
+      ],
+      "Hash": "ef6270cb713747aa8211620d6a47188d"
     },
     "nlme": {
       "Package": "nlme",
@@ -1668,6 +1679,22 @@
       ],
       "Hash": "aea2b8787db7088ba50ba389848569ee"
     },
+    "synthdid": {
+      "Package": "synthdid",
+      "Version": "0.0.9",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "synthdid",
+      "RemoteUsername": "synth-inference",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "b839f2cc1685c8fddcf274b882f82e2f6eab3894",
+      "Requirements": [
+        "R",
+        "mvtnorm"
+      ],
+      "Hash": "b4166f518a4e31296678d4dd89c9de86"
+    },
     "testthat": {
       "Package": "testthat",
       "Version": "3.1.8",
@@ -1788,6 +1815,30 @@
       ],
       "Hash": "f561504ec2897f4d46f0c7657e488ae1"
     },
+    "usmap": {
+      "Package": "usmap",
+      "Version": "0.6.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "rlang",
+        "usmapdata",
+        "utils"
+      ],
+      "Hash": "3523268bff91b7e38b52e5b190ce88c2"
+    },
+    "usmapdata": {
+      "Package": "usmapdata",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "utils"
+      ],
+      "Hash": "a0d95dc0884fc1eeed48a05757bec101"
+    },
     "utf8": {
       "Package": "utf8",
       "Version": "1.2.3",
@@ -1800,7 +1851,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.6.2",
+      "Version": "0.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1810,7 +1861,7 @@
         "lifecycle",
         "rlang"
       ],
-      "Hash": "a745bda7aff4734c17294bb41d4e4607"
+      "Hash": "d0ef2856b83dc33ea6e255caf6229ee2"
     },
     "viridis": {
       "Package": "viridis",
