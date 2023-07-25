@@ -43,14 +43,14 @@ obesityLong$year <- row.names(obesityLong)
 # obesityLong$year <- factor(obesityLong$year, levels = obesityLong$year)
 
 #remove years up to 2010
-obesityLong <- obesityLong %>% filter(year >= 2010)
+obesityLong <- obesityLong %>% filter(year >= 2010 & year < 2019)
 
-ggplot(obesityLong, aes(x = year, y = obesity, group = 1)) + geom_line(linewidth = 2.4, color = "brown") + geom_point(
-  fill = "brown", 
+ggplot(obesityLong, aes(x = year, y = obesity, group = 1)) + geom_line(linewidth = 2.4, color = "darkblue") + geom_point(
+  fill = "darkblue", 
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
   colour = "#FFFFFF", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = "Nationwide Obesity Prevalence, 2010-2019", 
+) + labs(title = "Nationwide Obesity Prevalence, 2010-2018", 
          x = "Year", 
          y = "Nationwide Obesity Prevalence (%)") + theme(plot.title = element_text(size=12))

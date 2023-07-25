@@ -1,5 +1,6 @@
 library(did)
 library(readr)
+library(dplyr)
 # didTable <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\finalDIDTable2.csv)")
 # didTable <- read_csv(r"(C:\Users\Owner\My Drive\RAP\data\finalDIDTable3.csv)")
 # didTable <- read_csv(r"(./test/testnewDidTable.csv)")
@@ -45,13 +46,13 @@ reg <- did2s(table,
       treatment = "TREATED",
       cluster_var = "GEO_ID", verbose = TRUE)
 
-reg <- did2s(table, 
-             yname = "HRTDISEASE",
-             first_stage = ~ MEDIANINCOME | GEO_ID + YEAR,
-             # first_stage = ~ 0 | GEO_ID + YEAR,
-             second_stage = ~i(REL_YEAR, ref= c(Inf)),
-             treatment = "TREATED",
-             cluster_var = "GEO_ID", verbose = TRUE)
+# reg <- did2s(table, 
+#              yname = "HRTDISEASE",
+#              first_stage = ~ MEDIANINCOME | GEO_ID + YEAR,
+#              # first_stage = ~ 0 | GEO_ID + YEAR,
+#              second_stage = ~i(REL_YEAR, ref= c(Inf)),
+#              treatment = "TREATED",
+#              cluster_var = "GEO_ID", verbose = TRUE)
 
 #     bootstrap = TRUE,
 # n_bootstraps = 50
@@ -94,9 +95,9 @@ for(groupIndex in 1:length(groups)){
                cluster_var = "GEO_ID", verbose = TRUE)
   fixest::coefplot(
     reg,
-    main = paste("Event study: Staggered treatment for ", names(groups)[groupIndex]),
-    xlab = "Relative time to treatment",
-    col = "steelblue", ref.line = -0.5
+    main = paste("Estimated Effect of Medicaid On HDM for ", names(groups)[groupIndex]),
+    xlab = "Relative Number of Years From Medicaid Expansion",
+    col = "turquoise4", lwd = 2
   )
 }
 

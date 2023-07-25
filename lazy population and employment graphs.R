@@ -30,19 +30,21 @@ for(year in years){
 
 statTable$year <- as.character(statTable$year)
 
-ggplot(statTable, aes(x = year, y = meanPop)) + geom_line()
-ggplot(statTable, aes(x = year, y = medianPop, group = group)) + geom_line()
+# ggplot(statTable, aes(x = year, y = meanPop)) + geom_line()
+# ggplot(statTable, aes(x = year, y = medianPop, group = group)) + geom_line()
+# 
+# ggplot(statTable, aes(x = year, y = meanEmploy)) + geom_line()
+# ggplot(statTable, aes(x = year, y = medianEmploy, group = group)) + geom_line()
 
-ggplot(statTable, aes(x = year, y = meanEmploy)) + geom_line()
-ggplot(statTable, aes(x = year, y = medianEmploy, group = group)) + geom_line()
+statTable <- statTable %>% filter(year != 2019)
 
-ggplot(statTable, aes(x = year, y = meanPop, group = 1)) + geom_line(linewidth = 2.4, color = "red") + geom_point(
-  fill = "red",
+ggplot(statTable, aes(x = year, y = meanPop, group = 1)) + geom_line(linewidth = 2.4, color = "darkblue") + geom_point(
+  fill = "darkblue",
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
   colour = "#FFFFFF", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = paste(sep="", "Average Population of US Counties, 2010-2019"), 
+) + labs(title = paste(sep="", "Average Population of US Counties, 2010-2018"), 
          x = "Year", 
          y = "Average Population") + theme(plot.title = element_text(size=14)) + coord_cartesian(ylim = c(70000,120000))
                                                                     
@@ -56,13 +58,13 @@ ggplot(statTable, aes(x = year, y = medianPop, group = 1)) + geom_line(linewidth
          x = "Year", 
          y = "Median Population") + theme(plot.title = element_text(size=14))
 
-ggplot(statTable, aes(x = year, y = meanEmploy, group = 1)) + geom_line(linewidth = 2.4, color = "red") + geom_point(
-  fill = "red",
+ggplot(statTable, aes(x = year, y = meanEmploy, group = 1)) + geom_line(linewidth = 2.4, color = "darkblue") + geom_point(
+  fill = "darkblue",
   size = 5, 
   pch = 21, # Type of point that allows us to have both color (border) and fill.
   colour = "#FFFFFF", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = paste(sep="", "Average Number of People Employed in US Counties, 2010-2019"), 
+) + labs(title = paste(sep="", "Average Number of People Employed in US Counties, 2010-2018"), 
          x = "Year", 
          y = "Average Number Employed") + theme(plot.title = element_text(size=14)) + coord_cartesian(ylim = c(70000,110000))
 
