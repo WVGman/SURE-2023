@@ -3,15 +3,15 @@
 
 Baker, A., Larcker, D. F., & Wang, C. C. Y. (2022). How much should we trust staggered difference-in-differences estimates? [SSRN Scholarly Paper]. https://doi.org/10.2139/ssrn.3794018
 
-Black, B., Hollingsworth, A., Nunes, L., & Simon, K. (2019). Simulated power analyses for observational studies: An application to the Affordable Care Act Medicaid expansion. *Journal of Public Economics, 213.
+Black, B., Hollingsworth, A., Nunes, L., & Simon, K. (2019). Simulated power analyses for observational studies: An application to the Affordable Care Act Medicaid expansion. *Journal of Public Economics, 213.*
 
-Garthwaite, C., Graves, J., Gross, T., Karaca, Z., Marone, V., & Notowidigdo, M. (2019). All Medicaid expansions are not created equal: The geography and targeting of the Affordable Care Act.  *Brookings Papers on Economic Activity, 2019(2), *1-92. 
+Garthwaite, C., Graves, J., Gross, T., Karaca, Z., Marone, V., & Notowidigdo, M. (2019). All Medicaid expansions are not created equal: The geography and targeting of the Affordable Care Act.  *Brookings Papers on Economic Activity, 2019(2),* 1-92. 
 
 KFF. (2023, July 3). Status of State Medicaid Expansion Decisions: Interactive Map. https://www.kff.org/medicaid/issue-brief/status-of-state-medicaid-expansion-decisions-interactive-map/
 *Note: Figure 1 is a modified version of the KFF’s status of State Medicaid Expansion Decisions, and does not reflect the figure on KFF’s website*
 
 
-Palanki, R., Chamarthy, S., & Palanki, S. (2021). Impact of the Affordable Care Act on diabetes diagnoses in the United States: A county-level analysis. *Economic Affairs, 41(1), *111–122.
+Palanki, R., Chamarthy, S., & Palanki, S. (2021). Impact of the Affordable Care Act on diabetes diagnoses in the United States: A county-level analysis. *Economic Affairs, 41(1),* 111–122.
 
 ## R packages:
 
