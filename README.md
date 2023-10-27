@@ -1,8 +1,8 @@
-﻿Welcome!
+﻿Welcome! This repo is archived, however I am continuing this research in my [ACA-Research repo]([url](https://github.com/gpk00003/ACA-Research)) during the Fall of 2023 and possibly beyond.
 
 I'm Grady King, and this is my repository for all the work I did during the WVU Summer Undergraduate Research Experience during the summer of 2023. I worked under Dr. Srinivas Palanki, investigating the impact of the Affordable Care Act, and specifically the Medicaid expansions, on preventable heart disease mortality. As a disclaimer, I am a beginner at R, only using it since January, so my code might be suboptimal, and I am also not a statistician or econometrician, so my methodology might be shaky. I think I got better as I went through the project though.
 
-Check out my final poster in `poster/` if you're interested in this research!
+Check out my final poster in `poster/` if you're interested in this research! 
 
 The main two causal inference estimators I used were a staggered two-stage difference-in-difference (did2s) for nationwide analysis and synthetic difference-in-difference (synthdid) for the adjacent state analyses due to its robustness in smaller settings.
 
