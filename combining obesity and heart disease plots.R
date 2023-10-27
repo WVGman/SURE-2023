@@ -51,16 +51,15 @@ plotSeries$group <- factor(plotSeries$group,ordered=TRUE, levels=c("Low Insuranc
 
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
 
-ggplot(plotSeries, aes(x = year, y = mean, group = group, color = group)) + geom_line(linewidth = 2.4) + geom_point(
-  aes(fill = group),
-  size = 5, 
-  pch = 21, # Type of point that allows us to have both color (border) and fill.
-  colour = "#FFFFFF", 
+ggplot(plotSeries, aes(x = year, y = mean, group = group, linetype = group)) + geom_line(linewidth = 1) + geom_point(
+  size = 3, 
+  aes(shape = group), # Type of point that allows us to have both color (border) and fill.
+  colour = "black", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = paste(sep="", "Average Heart Disease Mortality of County-Cohort Groups, 2006-2018"), 
+) + scale_shape_manual(values=c(15, 16, 17)) + labs(title = paste(sep="", "Average Heart Disease Mortality of County-Cohort Groups, 2006-2018"), 
          x = "Year", 
          y = "Age-standardized Mortality Rate per 100,000") + theme(plot.title = element_text(size=9)
-) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette) + coord_cartesian(ylim = c(0,85))
+) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
 
 
 plotSeries = data.frame(year=character(), mean=numeric(), groups=character())
@@ -95,11 +94,10 @@ avgAll <- data.frame(lapply(hrtDisease[,2:15], mean))
 avgAll <- pivot_longer(avgAll, 1:14, names_to = "year", values_to = "avgHrt")
 avgAll$year <- paste(sep = "", "20",substr(avgAll$year, 2, 4))
 
-ggplot(avgAll, aes(x = year, y = avgHrt, group=1, color="red")) + geom_line(linewidth = 2.4) + geom_point(
-  aes(fill="red"),
-  size = 5,
-  pch = 21, # Type of point that allows us to have both color (border) and fill.
-  colour = "#FFFFFF",
+ggplot(avgAll, aes(x = year, y = avgHrt, group=1)) + geom_line(linewidth = 1) + geom_point(
+  size = 3,
+  pch = 16, # Type of point that allows us to have both color (border) and fill.
+  colour = "black",
   stroke = 1 # The width of the border, i.e. stroke.
 ) + labs(title = paste(sep="", "Average Heart Disease Mortality of US Counties, 2006-2019"),
          x = "Year",

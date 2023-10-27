@@ -127,16 +127,16 @@ notAdoptedGroup <- pivot_longer(TableNotAdopted[1,], "2006":"2018", names_to="ye
 notAdoptedGroup$type <- "Did Not Expand"
 series2 <- rbind(adoptedGroup, notAdoptedGroup)
 
-ggplot(series2, aes(x = year, y = value, group = type, color = type)) + geom_line(linewidth = 2.4) + geom_point(
-  aes(fill = type), 
-  size = 5, 
-  pch = 21, # Type of point that allows us to have both color (border) and fill.
-  colour = "#FFFFFF", 
+ggplot(series2, aes(x = year, y = value, group = type)) + geom_line(linewidth = 1) + geom_point(
+  aes(shape = type), 
+  size = 3, 
+  colour = "black", 
   stroke = 1 # The width of the border, i.e. stroke.
-) + labs(title = "Comparing Heart Disease Mortality Rates of Medicare Expansion vs. Non-Expansion States, 2006-2018", 
+) + scale_shape_manual(values=c(15, 16)) + labs(title = "Comparing Heart Disease Mortality Rates of Medicare Expansion vs. Non-Expansion States, 2006-2018", 
          x = "Year", 
          y = "Age-standardized Mortality Rate per 100,000")  + theme(plot.title = element_text(size=10)
     ) + scale_fill_manual(values=cbPalette) + scale_colour_manual(values=cbPalette)
+
 
 ########################################################3
 #second part: heart disease and insurance by cohort
